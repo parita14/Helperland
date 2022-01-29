@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-//import multer from "multer";
 import { sequelize } from "./models";
 import router from "./routes";
 import internalDoc from "swagger-jsdoc";
@@ -37,7 +36,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false }));
-//app.use(multer({dest: 'files'}).single('file'));
 
 app.use('/', router);
 
