@@ -21,10 +21,14 @@ const controller: ContactsController = new ContactsController(service);
  *  ContactUs:
  *   type: object
  *   properties:
- *    Name:
+ *    FirstName:
  *     type: string
- *     description: name of user
+ *     description: First name of user
  *     example: 'Parita'
+ *    LastName:
+ *     type: string
+ *     description: Last name of user
+ *     example: 'Solanki'
  *    Email:
  *     type: string
  *     description: email of user
@@ -41,9 +45,9 @@ const controller: ContactsController = new ContactsController(service);
  *     type: string
  *     description: message
  *     example: 'having issue in booking service'
- *    UploadFileName:
- *     type: string
- *     description: file name
+ *    file:
+ *     type: file
+ *     description: upload file
  *     example: 'file.txt'
  *    IsDeleted:
  *     type: boolean
@@ -59,7 +63,7 @@ const controller: ContactsController = new ContactsController(service);
  *    description: create contacts form
  *    requestBody:
  *     content:
- *      application/json:
+ *      multipart/form-data:
  *       schema:
  *        $ref: '#/definitions/ContactUs'
  *    responses:
@@ -87,6 +91,8 @@ router.post('/contacts', controller.createContacts);
  *   responses:
  *    200:
  *     description: success 
+ *    500:
+ *     description: error
  */
 router.get('/contacts/:ContactUsId', controller.getContactsById);
 
