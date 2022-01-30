@@ -56,7 +56,16 @@ var ContactsController = /** @class */ (function () {
             });
         }); };
         this.createContacts = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
+            var firstName, lastName, Name;
+            var _a, _b;
+            return __generator(this, function (_c) {
+                firstName = req.body.FirstName;
+                lastName = req.body.LastName;
+                Name = firstName + " " + lastName;
+                req.body.Name = Name;
+                req.body.UploadFileName = (_a = req.file) === null || _a === void 0 ? void 0 : _a.originalname;
+                req.body.path = (_b = req.file) === null || _b === void 0 ? void 0 : _b.path;
+                console.log(req.body);
                 return [2 /*return*/, this.contactsService
                         .createContacts(req.body)
                         .then(function (contacts) {
