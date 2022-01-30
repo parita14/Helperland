@@ -21,6 +21,14 @@ export class ContactsController {
     };
 
     public createContacts = async (req: Request, res: Response): Promise<Response> => {
+      const firstName:string = req.body.FirstName;
+      const lastName:string = req.body.LastName;
+      const Name:string = firstName+" "+lastName;
+
+      req.body.Name = Name;
+      req.body.UploadFileName = req.file?.originalname;
+      req.body.path = req.file?.path;
+      console.log(req.body);
         return this.contactsService
           .createContacts(req.body)
           .then((contacts: ContactUs) => {
