@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var express_1 = __importDefault(require("express"));
+var fav_repository_1 = require("../../customer-pages/favourite-pros/fav.repository");
+var fav_service_1 = require("../../customer-pages/favourite-pros/fav.service");
+var fav_controller_1 = require("../../customer-pages/favourite-pros/fav.controller");
+var login_repository_1 = require("../../sign-up/login/login.repository");
+var login_service_1 = require("../../sign-up/login/login.service");
+var login_controller_1 = require("../../sign-up/login/login.controller");
+var favRouter = express_1.default.Router();
+var loginRepo = new login_repository_1.LogInRepository();
+var loginService = new login_service_1.LogInService(loginRepo);
+var loginController = new login_controller_1.LogInController(loginService);
+var repo = new fav_repository_1.FavRepository();
+var service = new fav_service_1.FavService(repo);
+var controller = new fav_controller_1.FavController(service);
+favRouter.post('/create-favorite-pros/:spId', loginController.validateToken, controller.FavSP, controller.removeFavSp);
+favRouter.get('/get-all-pros', loginController.validateToken, controller.SPworkedwithCustomer);
+favRouter.post('/create-blocked-pros/:spId', loginController.validateToken, controller.blockSP, controller.removeBlockedSp);
+module.exports = favRouter;
